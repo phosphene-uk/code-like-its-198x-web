@@ -80,7 +80,7 @@ code, pre { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga
 /* Emulator screenshots print narrower than the column, so they fit on the page more often
    instead of leaving a gap: three-quarters from 30 October 2026, 70% from 3 November, when Steve
    asked for every picture to be slightly smaller. Their captions keep to the same width. */
-.imageblock:has(img[src*="screens/"]) { width: 70%; margin-left: auto; margin-right: auto; }
+.imageblock.screen { width: 70%; margin-left: auto; margin-right: auto; }
 
 /* Checkpoints are paragraphs titled "Checkpoint"; the build marks them with a class,
    because e-readers don't support :has(). */
