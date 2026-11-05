@@ -1,6 +1,8 @@
 {
   "name": "code-like-its-198x-web",
   "compatibility_date": "2026-11-05",
+  "routes": [{ "pattern": "code-like-its-198x.phosphene.uk", "custom_domain": true }],
+  "workers_dev": false,
   "assets": {
     "directory": ".",
     "not_found_handling": "404-page"
