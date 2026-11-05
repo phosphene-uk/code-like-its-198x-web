@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Smallest Honest Computer · Code Like It’s 198x</title>
+<meta name="description" content="Chapter 1 of Code Like It’s 198x, free to read.">
+<meta name="author" content="Steve Hill">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles/book.css">
+<link rel="stylesheet" href="styles/web.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header"><div class="inner">
+<a href="index.html">Code Like It’s 198x</a>
+<span class="imprint"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="16" cy="16" r="6.8" stroke-width="3"/><circle cx="16" cy="16" r="11" stroke-width="1.2" opacity=".6"/><circle cx="16" cy="16" r="14.6" stroke-width=".9" opacity=".3"/></g></svg>Phosphene</span>
+</div></header>
+<main id="main">
+<p class="label">Part 1: What We Mean By “Code”</p><div class="partintro"><div class="paragraph">
+<p>In the modern era, programming is full of abstractions and compromises that most of us no longer notice. That’s partly because modern computer systems are so complex that it’s impossible to keep all their details in your head at the same time.</p>
+</div>
+<div class="paragraph">
+<p>For that reason, we won’t be talking about modern systems here. Instead, we’re going to focus on a single, small, highly constrained machine: the Sinclair ZX Spectrum.</p>
+</div>
+<div class="paragraph">
+<p>The Spectrum was the computer I started out with in the 1980s. More importantly, it’s simple enough that there are very few layers of abstraction to worry about. When something goes wrong, it’s usually clear that <em>something</em> is wrong, even if the reason isn’t yet obvious.</p>
+</div>
+<div class="paragraph">
+<p>The Spectrum was built to a price. When it was launched in 1982, the cheaper of its two models retailed for £125 – a price point that required tight control over production costs. Features weren’t added unless they were essential, and compromises weren’t hidden so much as accepted.</p>
+</div>
+<div class="paragraph">
+<p>You won’t learn how to program in this section. You’ll learn how to interpret what happens when you do. These foundations are essential to everything that comes next.</p>
+</div></div><div class="sect1">
+<h1 class="chapter-title" id="_the_smallest_honest_computer"><span class="label">Chapter 1</span>The Smallest Honest Computer</h1>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Sinclair ZX Spectrum, or “Speccy” for short, was launched in the UK in April 1982.</p>
+</div>
+<div class="paragraph">
+<p>There were two models available; one with 16KB of RAM that retailed for £125, and one which had 48KB of RAM that retailed for £175.</p>
+</div>
+<div class="paragraph">
+<p>Aside from the amount of available RAM, both models were identical, right down to the rubber membrane keyboard that you either loved or you hated.</p>
+</div>
+<div class="paragraph">
+<p>They relied on the same CPU, the same ULA chip, and were intended to be connected to your home television set. Software had to be loaded via a cassette deck (not included). Until later models were introduced, you couldn’t even plug a joystick in directly. And a mouse was something you’d find on an office workstation costing many times as much, not under a television in somebody’s front room.</p>
+</div>
+<div class="paragraph">
+<p>Explicitly, these were home computers, not intended to be something you’d see in your office.</p>
+</div>
+<div class="sect2">
+<h2 id="_whats_in_the_box">What’s in the box</h2>
+<div class="paragraph">
+<p>Take the case off a Spectrum and there isn’t much to see. That’s the first thing worth noticing.</p>
+</div>
+<div class="paragraph">
+<p>There’s a processor, a Zilog Z80A, which does the actual computing. There’s a 16KB ROM, a chip whose contents were fixed at the factory and can never change; it holds the BASIC language and everything else the machine knows how to do when you switch it on. There’s RAM, the memory your programs and pictures live in, which forgets everything when the power goes off. And there’s one large custom chip called the ULA.</p>
+</div>
+<div class="paragraph">
+<p>ULA stands for uncommitted logic array. It was a kind of chip the manufacturer, Ferranti, made with thousands of logic gates laid down but not yet connected. A customer like Sinclair designed the final layer of wiring, and Ferranti finished the chips to order. That was far cheaper than designing a chip from scratch, and far smaller than building the same logic from dozens of standard parts. The Spectrum’s ULA takes on almost every job that isn’t computing: it draws the picture, reads the keyboard and the cassette, and drives the speaker and the cassette output.</p>
+</div>
+<div class="paragraph">
+<p>A processor, some memory, and one chip to glue it all to the outside world. That’s nearly the whole computer.</p>
+</div>
+<div class="paragraph">
+<p>Even the memory was built to a price. The 16K Spectrum’s RAM is eight chips, each holding 16,384 bits: one bit of every byte. The 48K model adds eight more for the other 32K, and on the early boards those weren’t 32K chips at all. They were 64K chips made by Texas Instruments, and, as Adrian Dickens’s hardware manual puts it, chips “which failed to operate to specifications”. Half of each one had faults, so that half went unused. Some had a good lower half and some a good upper half, and a wire link on the circuit board told the machine which kind it had been given. The 48K Spectrum’s extra memory was made from chips that had failed their test, each one used for the half that worked.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_where_the_picture_comes_from">Where the picture comes from</h2>
+<div class="paragraph">
+<p>Putting a picture on a television is a bigger job than it sounds.</p>
+</div>
+<div class="paragraph">
+<p>A television doesn’t wait to be told what to show. It draws the picture line by line, fifty times a second, whether anything is ready or not. Something in the computer has to keep up with it: every line, every frame, for as long as the machine is switched on.</p>
+</div>
+<div class="paragraph">
+<p>To see why that matters, look at the machine Sinclair sold the year before.</p>
+</div>
+<div class="paragraph">
+<p>The ZX81 was launched in March 1981 at £69.95 ready-built, or less as a kit you soldered together yourself. It was even simpler than the Spectrum, and it got that way by making its processor help draw the picture. While the television was showing the screen, the Z80 inside the ZX81 spent its time feeding it, and your program simply stopped. A book about the machine’s hardware put it plainly: in the ZX81’s normal mode, your program runs for only about a quarter of the time.</p>
+</div>
+<div class="paragraph lead-in">
+<p>You can measure it. Here’s a ZX81 program that prints a line and then counts to 300.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="zx81-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">PRINT</span> <span class="s">"COUNTING TO 300"</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">FOR</span> <span class="nv">I</span><span class="o">=</span><span class="m">1</span> <span class="k">TO</span> <span class="m">300</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">NEXT</span> <span class="nv">I</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">40</span> <span class="k">PRINT</span> <span class="s">"DONE"</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/counting.png" alt="The words COUNTING TO 300 in black on a white ZX81 screen">
+</div>
+<div class="title">The ZX81 counting in its normal mode. The picture stays on the screen while the program runs.</div>
+</div>
+<div class="paragraph">
+<p>It takes about 5.3 seconds.</p>
+</div>
+<div class="paragraph">
+<p>The ZX81 also had a second mode, called FAST. In FAST mode the processor stopped drawing the picture altogether. Add one line to the start of the program, <code>5 FAST</code>, and the same count takes about 1.3 seconds: four times as quick, just as the hardware book says.</p>
+</div>
+<div class="paragraph">
+<p>The catch was the screen. While a program ran in FAST mode, the picture disappeared, leaving a plain grey screen, and it only came back when the program finished. You could have a picture, or you could have your program’s full attention, but not both.</p>
+</div>
+<div class="paragraph">
+<p>Why did the program have to stop? Because while the ZX81 draws a line of the picture, its processor is part of the drawing. Don Thomasson’s hardware manual describes how. At the start of the picture, the ULA interrupts the processor, and a routine in the ROM points the processor at the display file, the part of memory that holds the characters on the screen. Then the processor walks through it. Each step does nothing, as far as the processor is concerned, but each one puts an address on the wires that lead to the memory, and in between, the processor puts out a second address of its own, built from a register called I.</p>
+</div>
+<div class="paragraph">
+<p>The ULA does the rest. As the processor’s first address reads each character from the display file, the ULA catches it, combines it with the processor’s second address and a counter of its own, and uses the result to find that character’s pattern of dots in the ROM. It sends the dots to the television, a new byte every 1.23 microseconds. Every character on the screen is read like that, eight times over, once for each line of dots it covers.</p>
+</div>
+<div class="paragraph">
+<p>So while the picture is drawn, the processor isn’t waiting for something else to finish. Walking through memory, putting out addresses, <em>is</em> the drawing. It can’t do anything else, because if it did, the picture would stop. “It all fits in beautifully,” Thomasson wrote, “but working it out must have cost a few headaches.”</p>
+</div>
+<div class="paragraph">
+<p>The Spectrum’s ULA is the answer to that problem. The picture lives in an ordinary part of the RAM, and the ULA reads it from there and turns it into a television signal by itself, fifty times a second. Your program only has to put the right numbers in that part of memory. The ULA does the rest.</p>
+</div>
+<div class="paragraph">
+<p>The processor runs at 3.5 MHz, which means its clock ticks three and a half million times every second, and each instruction takes a fixed number of those ticks. With the ULA drawing the screen, every one of those ticks belongs to your program. If you want to know how fast a Spectrum is, that number is the answer.</p>
+</div>
+<div class="paragraph">
+<p>Hold on to that idea. It’s the first lie in this book, and we’ll come back for it.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_what_the_processor_still_has_to_do">What the processor still has to do</h2>
+<div class="paragraph">
+<p>The ULA draws the picture, but it doesn’t do anything clever. Almost everything else is left to the processor.</p>
+</div>
+<div class="paragraph">
+<p>When you press a key, the ULA can tell the processor which keys are down if it asks, but nothing happens unless a program asks. When the Spectrum makes a sound, there’s no sound chip: the processor flicks the speaker in and out, hundreds or thousands of times a second, and the timing of those flicks is the note. When a program loads from tape, the processor sits and measures the sound coming in from the cassette, one wave at a time, and works out the bytes from how long each wave lasts.</p>
+</div>
+<div class="paragraph">
+<p>In contrast to modern systems, there was no dedicated video RAM, and a minimal amount of custom hardware. The ULA drew the picture; the processor did nearly everything else. This was deliberate, as it kept production costs low.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_why_honest">Why “honest”</h2>
+<div class="paragraph">
+<p>Every computer you’ve used hides most of what it’s doing. That’s not a flaw. A phone that showed you everything would be unusable.</p>
+</div>
+<div class="paragraph">
+<p>The Spectrum couldn’t afford to hide much. There was no room in the budget for a layer that would keep you away from the hardware, so there isn’t one. The screen is a block of memory you can see. The keyboard is a set of wires you can read. When the machine is slow, it’s slow for a reason that’s somewhere in a chip you can name.</p>
+</div>
+<div class="paragraph">
+<p>That’s what makes it honest. Not virtuous: honest because it was too cheap to lie.</p>
+</div>
+<div class="paragraph">
+<p>It also forces us to deal directly with the hardware. Once we understand what the machine is telling us, we’ll be able to see exactly what’s happening at every stage.</p>
+</div>
+</div>
+</div>
+</div><nav class="chapter-nav" aria-label="Chapters"><a class="prev" href="introduction.html"><small>Previous</small>Introduction</a><a class="next" href="what-the-machine-actually-sees.html"><small>Next</small>What the Machine Actually Sees</a></nav>
+</main>
+<footer class="site-footer"><div class="inner">
+<p>Code Like It’s 198x, by Steve Hill. Published by Phosphene, <a href="https://phosphene.uk/">phosphene.uk</a>.</p>
+<p>Part 1 is free to read. The whole book continues in the PDF and ebook editions.</p>
+<p>Version 1.0. <a href="updates.html">What’s changed</a></p>
+</div></footer>
+</body>
+</html>

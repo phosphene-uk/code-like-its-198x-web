@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477 204" width="477" height="204" font-family="Nebula Sans, sans-serif">
+<text x="0" y="14" font-size="12" fill="#6b6559">Address</text>
+<text x="110" y="14" text-anchor="end" font-size="12" fill="#6b6559">Byte</text>
+<text x="140" y="14" font-size="12" fill="#6b6559">Binary</text>
+<text x="300" y="14" font-size="12" fill="#6b6559">Dots</text>
+<text x="0" y="44" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15880</text>
+<text x="110" y="44" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">0</text>
+<text x="140" y="44" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">00000000</text>
+<rect x="300" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="28" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="66" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15881</text>
+<text x="110" y="66" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">60</text>
+<text x="140" y="66" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">00111100</text>
+<rect x="300" y="50" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="50" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="50" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="50" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="50" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="50" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="50" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="50" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="88" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15882</text>
+<text x="110" y="88" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">66</text>
+<text x="140" y="88" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">01000010</text>
+<rect x="300" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="72" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="72" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="72" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="110" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15883</text>
+<text x="110" y="110" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">66</text>
+<text x="140" y="110" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">01000010</text>
+<rect x="300" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="94" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="94" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="94" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="132" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15884</text>
+<text x="110" y="132" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">126</text>
+<text x="140" y="132" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">01111110</text>
+<rect x="300" y="116" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="116" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="116" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="154" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15885</text>
+<text x="110" y="154" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">66</text>
+<text x="140" y="154" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">01000010</text>
+<rect x="300" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="138" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="138" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="138" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="176" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15886</text>
+<text x="110" y="176" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">66</text>
+<text x="140" y="176" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">01000010</text>
+<rect x="300" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="160" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="160" width="22" height="22" fill="#1b1a17" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="160" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<text x="0" y="198" font-family="JetBrains Mono, monospace" font-size="13" fill="#6b6559">15887</text>
+<text x="110" y="198" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">0</text>
+<text x="140" y="198" font-family="JetBrains Mono, monospace" font-size="13" fill="#1b1a17">00000000</text>
+<rect x="300" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="322" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="344" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="366" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="388" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="410" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="432" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+<rect x="454" y="182" width="22" height="22" fill="#ffffff" stroke="#d9d4c7" stroke-width="1"/>
+</svg>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the Machine Actually Sees · Code Like It’s 198x</title>
+<meta name="description" content="Chapter 2 of Code Like It’s 198x, free to read.">
+<meta name="author" content="Steve Hill">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles/book.css">
+<link rel="stylesheet" href="styles/web.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header"><div class="inner">
+<a href="index.html">Code Like It’s 198x</a>
+<span class="imprint"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="16" cy="16" r="6.8" stroke-width="3"/><circle cx="16" cy="16" r="11" stroke-width="1.2" opacity=".6"/><circle cx="16" cy="16" r="14.6" stroke-width=".9" opacity=".3"/></g></svg>Phosphene</span>
+</div></header>
+<main id="main">
+<div class="sect1">
+<h1 class="chapter-title" id="_what_the_machine_actually_sees"><span class="label">Chapter 2</span>What the Machine Actually Sees</h1>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before we can talk about programs, we need to talk about what a program is made of. And to do that, we need to look at the computer the way the computer looks at itself.</p>
+</div>
+<div class="paragraph">
+<p>It isn’t going to be flattering.</p>
+</div>
+<div class="sect2">
+<h2 id="_a_row_of_boxes">A row of boxes</h2>
+<div class="paragraph">
+<p>The Spectrum’s own manual describes memory as a row of boxes. Each box has a number on the front, its address, starting at 0. Each box holds one number between 0 and 255. Some of the boxes have glass lids: you can see what’s inside, but you can’t change it. Those are the ROM. The rest you can open, and put a different number in. Those are the RAM.</p>
+</div>
+<div class="paragraph">
+<p>On a 48K Spectrum there are 65,536 boxes. The first 16,384 are ROM. The rest, from address 16384 to the end, are RAM.</p>
+</div>
+<div class="paragraph lead-in">
+<p>The glass lids are real. This program reads the very first box, tries to put a 1 in it, and reads it again.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">PRINT</span> <span class="k">PEEK</span> <span class="m">0</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">POKE</span> <span class="m">0</span><span class="p">,</span><span class="m">1</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">PRINT</span> <span class="k">PEEK</span> <span class="m">0</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/glass-lid.png" alt="The top of a Spectrum screen with 243 printed twice">
+</div>
+<div class="title">Before and after the POKE.</div>
+</div>
+<div class="paragraph">
+<p>Both times, the box holds 243. The POKE didn’t cause an error. It just didn’t open the lid. That 243, as it happens, is the first number the processor reads when the Spectrum is switched on; chapter 11 comes back to it.</p>
+</div>
+<div class="paragraph">
+<p>Most of the RAM has a job before you’ve typed a thing. This is how a 48K Spectrum shares out its boxes just after it’s switched on, read from the machine itself.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/charts/memory-map.svg" alt="A bar of all 65536 addresses: a quarter ROM; then the screen; then a sliver of small areas the ROM uses for itself; then free memory up to a thin strip of user-defined graphics at the very top">
+</div>
+<div class="title">A 48K Spectrum’s memory just after it’s switched on, to scale.</div>
+</div>
+<div class="paragraph">
+<p>A quarter of the boxes are ROM. The next 6,912 hold the picture: 6,144 for the dots and 768 for their colours, and chapters 6 and 7 are about those. After that come a few small areas the ROM keeps for its own use, such as the system variables, where it notes things like where your program starts. Then there’s your program, and everything above it is free, up to 168 boxes at the very top that hold the patterns for characters you can design yourself. Come back to this picture whenever a chapter mentions an address.</p>
+</div>
+<div class="paragraph">
+<p>The number in a box is called a byte. You’ll see it written three ways in this book: as an ordinary number, like 65; in binary, like 01000001, which shows the eight individual on-or-off switches the byte is made of; and in hexadecimal, like $41, which is a compact way of writing binary that programmers prefer. They’re three spellings of the same thing. Appendix B explains how they relate, if you want to know, but you don’t need to.</p>
+</div>
+<div class="paragraph">
+<p>That’s all memory is: boxes, addresses and bytes. Everything a Spectrum does, from BASIC to games to the picture on your television, is the processor and the ULA reading and changing the numbers in those boxes.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_what_a_byte_means">What a byte means</h2>
+<div class="paragraph">
+<p>Here’s the question this chapter is really about. If you open a box and find the number 65 inside, what does it mean?</p>
+</div>
+<div class="paragraph">
+<p>The honest answer is: nothing. Not yet.</p>
+</div>
+<div class="paragraph">
+<p>A byte doesn’t carry a label saying what it’s for. There’s nothing in the box except the number. Whatever 65 means, it means because of where it is and what reads it.</p>
+</div>
+<div class="paragraph">
+<p>You don’t have to take that on trust. Here’s what happens when the same byte, 65, is put in three different places on a Spectrum.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/one-byte-three-ways.png" alt="A Spectrum screen with three bands: thin black vertical stripes on grey at the top, solid bright blue in the middle, and rows of capital A at the bottom">
+</div>
+<div class="title">The byte 65 three times: as pixels in the top third of the screen, as colour in the middle third, and as a letter at the bottom.</div>
+</div>
+<div class="paragraph">
+<p>At the top, 65 has been written into the part of memory the ULA turns into dots on the screen. In binary, 65 is 01000001, and each 1 becomes a dot of ink: one dot near the left of every eight, one at the far right. Repeat that across the screen and you get stripes.</p>
+</div>
+<div class="paragraph">
+<p>In the middle, 65 has been written into the part of memory the ULA reads for colour. There, the eight switches are read as instructions about colour: the first means “flash”, the second “bright”, the next three choose the background colour and the last three choose the colour of the dots. 01000001 reads as: don’t flash, be bright, black background, blue dots. Every dot in that band is switched on, so you see bright blue.</p>
+</div>
+<div class="paragraph">
+<p>At the bottom, the program asked BASIC to print the character whose number is 65. BASIC looked it up in the Spectrum’s character set, where 65 is the capital letter A.</p>
+</div>
+<div class="paragraph">
+<p>The character set is bytes too. Near the end of the ROM, the Spectrum keeps eight bytes for every character it can print, one for each row of its dots. These are the eight for A, read from a Spectrum’s ROM.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/charts/letter-a.svg" alt="Eight rows. Each gives an address from 15880 to 15887 and a byte with its binary digits. Beside them the 1s are drawn as black squares which make a capital A">
+</div>
+<div class="title">The capital A, as the ROM stores it: eight bytes, one for each row of dots.</div>
+</div>
+<div class="paragraph">
+<p>Every 1 is a dot of ink and every 0 is paper. To print an A, the ROM copies those eight bytes into the part of memory the ULA turns into dots. That’s all a letter is to a Spectrum: eight numbers, copied to the right place.</p>
+</div>
+<div class="paragraph">
+<p>Same number, three places, three completely different results. The byte didn’t change. Only the reader did.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_bigger_than_a_box">Bigger than a box</h2>
+<div class="paragraph">
+<p>A box holds a number from 0 to 255. Plenty of things need bigger numbers than that, starting with addresses: there are 65,536 of them. The manual’s answer is that “an address can be stored as two bytes”.</p>
+</div>
+<div class="paragraph lead-in">
+<p>The ROM keeps the address where your BASIC program starts in two boxes, 23635 and 23636. This program reads them, and then reads the first two boxes of the program itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">PRINT</span> <span class="k">PEEK</span> <span class="m">23635</span><span class="p">;</span><span class="s">" "</span><span class="p">;</span><span class="k">PEEK</span> <span class="m">23636</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">PRINT</span> <span class="k">PEEK</span> <span class="m">23635</span><span class="o">+</span><span class="m">256</span><span class="o">*</span><span class="k">PEEK</span> <span class="m">23636</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">PRINT</span> <span class="k">PEEK</span> <span class="m">23755</span><span class="p">;</span><span class="s">" "</span><span class="p">;</span><span class="k">PEEK</span> <span class="m">23756</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/two-byte-numbers.png" alt="The top of a Spectrum screen showing three lines: 203 92, then 23755, then 0 10">
+</div>
+<div class="title">Two boxes, read separately and together, and then the first two boxes of the program.</div>
+</div>
+<div class="paragraph">
+<p>The two boxes hold 203 and 92. Neither one is the address, but together they are: the second counts in 256s, so 203 + 256 × 92 is 23,755, the box where the program starts. The small part comes first and the big part second. That’s how the Z80 keeps its two-byte numbers.</p>
+</div>
+<div class="paragraph">
+<p>The program’s first two boxes, at 23755 and 23756, hold the number of its first line, 10. They come out as 0 and then 10: the big part first. The manual owns up to it: “in contrast with all other cases of two-byte numbers in the Z80, the line number here is stored with its more significant byte first: that is to say, in the order that you write them down in.”</p>
+</div>
+<div class="paragraph">
+<p>So here’s a fourth meaning for a byte: half of a bigger number, in an order that only the reader knows. The same machine uses both orders, and nothing in the boxes says which is which.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_the_fourth_reader">The fourth reader</h2>
+<div class="paragraph">
+<p>There’s one more thing that can read a byte, and it’s the most important one: the processor.</p>
+</div>
+<div class="paragraph">
+<p>When the Z80 reads a byte as an instruction, 65 means “copy whatever is in a small internal store called C into another one called B”. It takes four ticks of the clock, and then the processor reads the next byte and does whatever that says.</p>
+</div>
+<div class="paragraph">
+<p>A byte read this way is called an opcode, short for “operation code”: a number that names one thing for the processor to do. Zilog, who designed the Z80, gave it a list of these numbers, and the processor has the list built in. Some opcodes are complete on their own, as 65 is. Others need more: an opcode can say “and the number to use is in the next byte”, or “in the next two”, and the processor reads those too before it does anything. So the processor never asks what a byte means. It reads an opcode, reads whatever that opcode says comes with it, does it, and moves on. Chapter 4 shows the words programmers wrote instead of these numbers, and chapter 11 follows the processor from one opcode to the next.</p>
+</div>
+<div class="paragraph">
+<p>The processor doesn’t know whether those bytes were meant as instructions. If it’s pointed at the stripes at the top of that screen, it will cheerfully execute them, 65 after 65, copying C into B over and over again until it runs off the end into something else. Nothing stops it. Nothing even notices.</p>
+</div>
+<div class="paragraph lead-in">
+<p>You can watch the two readers share the same bytes. This program puts four numbers into the very first boxes of the picture, 1, 65, 0 and 201, and then tells the processor to run them, with <code>USR</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">POKE</span> <span class="m">16384</span><span class="p">,</span><span class="m">1</span><span class="p">:</span> <span class="k">POKE</span> <span class="m">16385</span><span class="p">,</span><span class="m">65</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">POKE</span> <span class="m">16386</span><span class="p">,</span><span class="m">0</span><span class="p">:</span> <span class="k">POKE</span> <span class="m">16387</span><span class="p">,</span><span class="m">201</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">PRINT</span> <span class="k">AT</span> <span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">;</span><span class="k">USR</span> <span class="m">16384</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/bytes-as-program.png" alt="A close-up of the top left of a Spectrum screen: a few scattered dots along the top edge, and the number 65 below">
+</div>
+<div class="title">The four bytes as dots, top left, and what the processor made of them.</div>
+</div>
+<div class="paragraph">
+<p>The ULA reads the four bytes as dots, the few specks along the top edge. The processor reads the same four as two instructions. The opcode 1 means “put the two-byte number that follows into a pair of stores called B and C”, so the processor reads the next two bytes as that number, not as opcodes: 65 and 0, which make 65, small part first. The next opcode, 201, means “go back to whoever called”. <code>USR</code> hands back whatever is in B and C, so BASIC prints 65. One set of bytes, read as a picture and as a program.</p>
+</div>
+<div class="paragraph">
+<p>It works the other way round too. These are the first 6,144 bytes of the ROM, where the processor starts work the moment the Spectrum is switched on, copied into the part of memory the ULA turns into dots.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/rom-as-picture.png" alt="A Spectrum screen filled edge to edge with a dense speckled pattern of black dots on grey">
+</div>
+<div class="title">The start of the ROM, shown as dots. Most of these bytes are instructions for the processor.</div>
+</div>
+<div class="paragraph">
+<p>To the ULA, the program that runs the whole machine looks like static. Nothing in those bytes says they’re a program. They only become one when the processor reads them.</p>
+</div>
+<div class="paragraph">
+<p>That’s the sense in which bytes have no meaning. A program is just bytes that someone intended the processor to read. A picture is bytes that someone intended the ULA to read. The machine doesn’t keep track of anybody’s intentions.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_utterly_literal">Utterly literal</h2>
+<div class="paragraph">
+<p>This can sound hostile, as if the machine is waiting for you to make a mistake. It isn’t. It has no idea what you want, so it can’t possibly be against it.</p>
+</div>
+<div class="paragraph">
+<p>What the machine is, is literal. It does exactly what the bytes say, in exactly the place they say it, every time. Every idea you’ll meet later in this book, from variables to programs to the BASIC language itself, is a human agreement about how to read the boxes. The boxes themselves don’t agree to anything.</p>
+</div>
+<div class="paragraph">
+<p>That’s the deal. The machine will do precisely what you tell it to, whether or not it’s what you meant. Everything that follows is about learning to tell it the right thing.</p>
+</div>
+</div>
+</div>
+</div><nav class="chapter-nav" aria-label="Chapters"><a class="prev" href="the-smallest-honest-computer.html"><small>Previous</small>The Smallest Honest Computer</a><a class="next" href="basic-a-very-kind-lie.html"><small>Next</small>BASIC: A Very Kind Lie</a></nav>
+</main>
+<footer class="site-footer"><div class="inner">
+<p>Code Like It’s 198x, by Steve Hill. Published by Phosphene, <a href="https://phosphene.uk/">phosphene.uk</a>.</p>
+<p>Part 1 is free to read. The whole book continues in the PDF and ebook editions.</p>
+<p>Version 1.0. <a href="updates.html">What’s changed</a></p>
+</div></footer>
+</body>
+</html>

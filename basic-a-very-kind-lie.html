@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BASIC: A Very Kind Lie · Code Like It’s 198x</title>
+<meta name="description" content="Chapter 3 of Code Like It’s 198x, free to read.">
+<meta name="author" content="Steve Hill">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles/book.css">
+<link rel="stylesheet" href="styles/web.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-header"><div class="inner">
+<a href="index.html">Code Like It’s 198x</a>
+<span class="imprint"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="16" cy="16" r="6.8" stroke-width="3"/><circle cx="16" cy="16" r="11" stroke-width="1.2" opacity=".6"/><circle cx="16" cy="16" r="14.6" stroke-width=".9" opacity=".3"/></g></svg>Phosphene</span>
+</div></header>
+<main id="main">
+<div class="sect1">
+<h1 class="chapter-title" id="_basic_a_very_kind_lie"><span class="label">Chapter 3</span>BASIC: A Very Kind Lie</h1>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Switch on a Spectrum and, after a moment, it says © 1982 Sinclair Research Ltd at the bottom of the screen and waits. There’s no menu, no desktop, nothing to click. There’s just a cursor, and the expectation that you’ll type something.</p>
+</div>
+<div class="paragraph">
+<p>What you type is BASIC.</p>
+</div>
+<div class="sect2">
+<h2 id="_the_conversation">The conversation</h2>
+<div class="paragraph">
+<p>BASIC was the language most home computers of the early 1980s spoke when you switched them on. The Spectrum took it further than most: the language was so much the point of the machine that the keywords were printed on the keys. Press P at the start of a line and you don’t get the letter P, you get the whole word PRINT, in one go. The manual says the keywords are “entered from the keyboard rather than being spelled out”.</p>
+</div>
+<div class="paragraph">
+<p>So you type a line, <code>PRINT 2+2</code>, and the Spectrum answers 4. You type another, and it answers again. It feels like a conversation, and that feeling is BASIC’s great gift. It let millions of people tell a computer what to do without knowing anything about addresses, bytes or processors.</p>
+</div>
+<div class="paragraph">
+<p>Look at what you didn’t have to think about, even in that one line. Where in memory the 2s were kept. How a number is stored in a row of boxes that only hold 0 to 255. Which instructions the processor needed to add them up. How the answer was turned into the shapes of a 4 on the screen. BASIC did all of that, and didn’t mention it.</p>
+</div>
+<div class="paragraph">
+<p>That’s the kind lie. When you use BASIC, it seems as if you’re talking to the computer. You type, it understands, it does what you asked.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_who_youre_really_talking_to">Who you’re really talking to</h2>
+<div class="paragraph lead-in">
+<p>Here’s a program that fills the screen with ink, one byte at a time. It counts through every byte of the part of memory the ULA turns into dots, from address 16384 to 22527, and puts 255 in each one, which switches all eight dots on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">FOR</span> <span class="nv">n</span><span class="o">=</span><span class="m">16384</span> <span class="k">TO</span> <span class="m">22527</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">POKE</span> <span class="nv">n</span><span class="p">,</span><span class="m">255</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">NEXT</span> <span class="nv">n</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Three lines, and nothing in them is hard. Run it, and it takes about 46 seconds.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/fill-the-screen-halfway.png" alt="A Spectrum screen with its top third solid black and its middle third filled in horizontal stripes">
+</div>
+<div class="title">The screen halfway through the fill. The order it fills in is a story for chapter 6.</div>
+</div>
+<div class="paragraph">
+<p>Forty-six seconds is a long time to switch on 49,152 dots. In chapter 4 you’ll meet the same loop written in machine code, the processor’s own language: the same steps, one byte at a time, in the same order. It finishes in less than a tenth of a second, hundreds of times faster. The processor is the same. The memory is the same. The difference is everything BASIC does that you didn’t ask for.</p>
+</div>
+<div class="paragraph">
+<p>Divide it out, and the difference has a size. Forty-six seconds over 6,144 trips round the loop is about seven and a half thousandths of a second for each trip. The processor’s clock ticks three and a half million times a second, so each trip costs about 26,000 ticks, to put one number in one box. Chapter 4’s version does the same job in about 44. For every tick the work needs, BASIC spends nearly six hundred.</p>
+</div>
+<div class="paragraph">
+<p>Every time round that loop, BASIC goes back to your program and reads the next statement as if it had never seen it before. It finds the word POKE and works out what it means. It finds <code>n</code>, and goes looking through its list of variables to find out what <code>n</code> holds. It checks that the address is a sensible one and that the value fits in a byte. Only then does it put 255 in the box. Then it reads NEXT and does the same kind of thing all over again, and then it goes back to POKE, which it has forgotten all about.</p>
+</div>
+<div class="paragraph">
+<p>That’s what an interpreter is: a program that reads your program, a piece at a time, and does what it says. It never turns your program into anything faster. It just reads it again, over and over, as long as it runs.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_searching_every_time">Searching, every time</h2>
+<div class="paragraph lead-in">
+<p>You can measure the reading. Here’s a loop that counts to 1,000 and copies its counter into another variable each time round. On its own, it takes about 6.6 seconds. This version makes twenty other variables first.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">LET</span> <span class="nv">a</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">b</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">c</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">d</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">e</span><span class="o">=</span><span class="m">1</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">LET</span> <span class="nv">f</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">g</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">h</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">i</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">j</span><span class="o">=</span><span class="m">1</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">LET</span> <span class="nv">k</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">l</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">m</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">o</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">p</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">40</span> <span class="k">LET</span> <span class="nv">q</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">r</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">s</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">u</span><span class="o">=</span><span class="m">1</span><span class="p">:</span> <span class="k">LET</span> <span class="nv">v</span><span class="o">=</span><span class="m">1</span>
+</span><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">100</span> <span class="k">FOR</span> <span class="nv">n</span><span class="o">=</span><span class="m">1</span> <span class="k">TO</span> <span class="m">1000</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">110</span> <span class="k">LET</span> <span class="nv">t</span><span class="o">=</span><span class="nv">n</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">120</span> <span class="k">NEXT</span> <span class="nv">n</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The loop hasn’t changed at all, but now it takes about 12 seconds, nearly twice as long. BASIC keeps its variables in one list, in the order they were made. Every time it meets a name, it starts at the top of the list and checks each variable in turn until it finds the right one. The loop’s <code>n</code> and <code>t</code> were made last, so they’re now at the bottom of a list of twenty-two.</p>
+</div>
+<div class="paragraph">
+<p>Lines are found the same way. When BASIC meets GO TO 3020, it doesn’t know where line 3020 is. It starts at the first line of the program and checks each line’s number until it gets there. NEXT does the same when it goes back to the top of its loop.</p>
+</div>
+<div class="paragraph lead-in">
+<p>So where a loop sits in a program changes how fast it runs. In this program, lines 10 to 2000 are two hundred REM lines, which do nothing at all, and the listing leaves out all but the first three. After them comes a loop that jumps 500 times.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">REM</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">REM</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">30</span> <span class="k">REM</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">3000</span> <span class="k">FOR</span> <span class="nv">n</span><span class="o">=</span><span class="m">1</span> <span class="k">TO</span> <span class="m">500</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">3010</span> <span class="k">GO TO</span> <span class="m">3020</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">3020</span> <span class="k">NEXT</span> <span class="nv">n</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It takes about 17.7 seconds. Put the same loop at the start of the program, with the two hundred REM lines after it, and it takes about 3.2 seconds. It’s the same work, five and a half times faster, because each jump now finds its line at the start of the search instead of at the end.</p>
+</div>
+<div class="paragraph">
+<p>Nothing in the language tells you this. You only find out by knowing what BASIC does with your program while it runs.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_a_different_bargain">A different bargain</h2>
+<div class="paragraph">
+<p>BASIC wasn’t the only language a home computer could greet you with. In 1982, the year of the Spectrum, a company called Jupiter Cantab sold the Jupiter Ace, which spoke Forth instead. Its manual says Forth was chosen “because of its speed, its economical use of computer memory, and the way a few simple concepts give an elegant power to the whole language”. Inside is a Z80, like the Spectrum’s, running a little slower.</p>
+</div>
+<div class="paragraph lead-in">
+<p>Here is the counting loop from earlier in this chapter, in the Ace’s Forth.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="forth"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="mi">0</span> <span class="n">variable</span> <span class="n">t</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="k">:</span> <span class="nf">count</span> <span class="mi">1001</span> <span class="mi">1</span> <span class="n">do</span> <span class="n">i</span> <span class="n">t</span> <span class="n">!</span> <span class="n">loop</span> <span class="k">;</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="n">count</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/count-in-forth.png" alt="The top of a Jupiter Ace screen, white text on black: 0 variable t OK, then the definition of count, OK, then count OK">
+</div>
+<div class="title">The same loop on a Jupiter Ace. The Ace answers OK to each line it accepts.</div>
+</div>
+<div class="paragraph">
+<p>The first line makes a variable, <code>t</code>. The second defines a new word, <code>count</code>, which counts from 1 to 1000 and puts each number in <code>t</code>. The third runs it. It takes about 0.39 seconds. The same loop in the Spectrum’s BASIC took about 6.6: seventeen times as long, on a Spectrum whose processor is, if anything, a little faster.</p>
+</div>
+<div class="paragraph">
+<p>The difference is what each language does with your words. When the Ace meets the definition of <code>count</code>, it looks up each word once and stores where to find it. When <code>count</code> runs, it doesn’t read your text again. BASIC, as you’ve seen, reads every statement afresh each time round the loop.</p>
+</div>
+<div class="paragraph">
+<p>Forth’s speed came at a price, and you can see it in the listing: the numbers come before the thing done to them, so <code>1001 1 do</code> means “from 1 up to 1000”. The Ace’s manual starts with adding 2 and 2, which you type as <code>2 2 +</code>. “FORTH always works this way round,” it says; “its rule is: first gather together the numbers you’re interested in; then do the calculations on them.” BASIC was slow because it asked so little of you. Forth was fast because it asked more.</p>
+</div>
+<div class="paragraph">
+<p>So you were never talking to the computer. You were talking to BASIC, and BASIC was talking to the computer on your behalf, carefully, slowly, and without ever complaining.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_numbers_that_arent_quite_what_you_typed">Numbers that aren’t quite what you typed</h2>
+<div class="paragraph lead-in">
+<p>BASIC is kind about numbers too, and a little kinder than it is honest. It lets you type any number you like, and it seems to keep it. This program is the manual’s own.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sinclair-basic"><span class="code-keep"><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">10</span> <span class="k">PRINT</span> <span class="m">1e10</span><span class="o">+</span><span class="m">1</span><span class="o">-</span><span class="m">1e10</span><span class="p">,</span><span class="m">1e10</span><span class="o">-</span><span class="m">1e10</span><span class="o">+</span><span class="m">1</span>
+</span><span class="line" style="padding-left: 1.2em; text-indent: -1.2em"><span class="nl">20</span> <span class="k">PRINT</span> <span class="m">5e9</span><span class="o">+</span><span class="m">1</span><span class="o">-</span><span class="m">5e9</span>
+</span></span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/not-quite-numbers.png" alt="The top of a Spectrum screen showing 0 and 1 on the first line and 2 on the second">
+</div>
+<div class="title">Three sums that should each come to 1.</div>
+</div>
+<div class="paragraph">
+<p>Every one of those sums should come to 1. The first comes to 0, the second to 1, and the third to 2. The manual explains: numbers are held “to about nine and a half digits accuracy”, so ten thousand million, 1e10, can’t be held exactly, and the 1 you add to it is lost. In the last sum, the 1 is “rounded up to 2”. Add first and subtract second, and you get a different answer from subtracting first and adding second.</p>
+</div>
+<div class="paragraph">
+<p>It isn’t a fault in the ROM. A number has to fit in a fixed number of boxes, and some numbers don’t. BASIC doesn’t mention it, and most of the time you’ll never notice. Chapter 11 opens the boxes.</p>
+</div>
+</div>
+<div class="sect2">
+<h2 id="_why_its_still_a_kind_lie">Why it’s still a kind lie</h2>
+<div class="paragraph">
+<p>None of this makes BASIC bad. The care that makes it slow is the same care that makes it forgiving.</p>
+</div>
+<div class="paragraph">
+<p>It starts before you’ve run anything. Type a line BASIC can’t make sense of, such as <code>PRINT 2+</code>, with nothing after the plus, and press ENTER. BASIC won’t take it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/screens/syntax-error.png" alt="The bottom line of a Spectrum screen reading PRINT 2+, followed by an inverted question mark and an inverted L">
+</div>
+<div class="title">A line BASIC wouldn’t take, with the flashing question mark where it stopped understanding.</div>
+</div>
+<div class="paragraph">
+<p>It hands the line back for you to fix, with a flashing question mark at the point where it stopped understanding. Every line you type is checked the moment you press ENTER, so a mistake is caught while you can still see it, not halfway through a run. That checking is work too, done on your behalf, without being asked.</p>
+</div>
+<div class="paragraph">
+<p>And when a running program does go wrong, BASIC stops and tells you which line, and which statement in it. Poke a value that doesn’t fit in a byte and it stops you before anything breaks. Make a mistake in machine code and the screen fills with rubbish, or goes blank, or nothing happens at all, and you have to work out why on your own.</p>
+</div>
+<div class="paragraph">
+<p>And BASIC is quick in the way that mattered most in 1982: you could type a line, run it and see what happened, all inside a few seconds. For learning, that loop is worth far more than raw speed.</p>
+</div>
+<div class="paragraph">
+<p>But a kind lie is still a lie, and this one has a cost you’ve now seen: about 46 seconds, against less than a tenth of one. The next part of this book is about what happens when you stop asking BASIC to pass your messages on, and speak to the processor yourself.</p>
+</div>
+</div>
+</div>
+</div><section class="end-of-sample"><h2>That’s the end of Part 1</h2>
+<p>Part 2 carries on from here, with assembly language and what the Spectrum’s screen really is, in the PDF and ebook editions.</p>
+<p><a href="index.html">See everything the full book covers</a></p></section>
+<nav class="chapter-nav" aria-label="Chapters"><a class="prev" href="what-the-machine-actually-sees.html"><small>Previous</small>What the Machine Actually Sees</a></nav>
+</main>
+<footer class="site-footer"><div class="inner">
+<p>Code Like It’s 198x, by Steve Hill. Published by Phosphene, <a href="https://phosphene.uk/">phosphene.uk</a>.</p>
+<p>Part 1 is free to read. The whole book continues in the PDF and ebook editions.</p>
+<p>Version 1.0. <a href="updates.html">What’s changed</a></p>
+</div></footer>
+</body>
+</html>

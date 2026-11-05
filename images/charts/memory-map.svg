@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 256" width="640" height="256" font-family="Nebula Sans, sans-serif">
+<rect x="16.0" y="8" width="152.0" height="44" fill="#6b6559" stroke="#1b1a17" stroke-width="1"/>
+<rect x="168.0" y="8" width="57.0" height="44" fill="#a93800" stroke="#1b1a17" stroke-width="1"/>
+<rect x="225.0" y="8" width="7.1" height="44" fill="#a93800" stroke="#1b1a17" stroke-width="1"/>
+<rect x="232.1" y="8" width="2.4" height="44" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<rect x="234.5" y="8" width="1.7" height="44" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<rect x="236.2" y="8" width="0.2" height="44" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<rect x="236.4" y="8" width="386.1" height="44" fill="#ffffff" stroke="#1b1a17" stroke-width="1"/>
+<rect x="622.4" y="8" width="1.6" height="44" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<text x="92.0" y="34" text-anchor="middle" font-size="12" fill="#ffffff">ROM</text>
+<text x="429.4" y="34" text-anchor="middle" font-size="12" fill="#1b1a17">Program and free memory</text>
+<line x1="16.0" x2="16.0" y1="52" y2="56" stroke="#6b6559"/>
+<text x="16.0" y="69" text-anchor="start" font-size="12" fill="#6b6559">0</text>
+<line x1="168.0" x2="168.0" y1="52" y2="56" stroke="#6b6559"/>
+<text x="168.0" y="69" text-anchor="middle" font-size="12" fill="#6b6559">16384</text>
+<line x1="320.0" x2="320.0" y1="52" y2="56" stroke="#6b6559"/>
+<text x="320.0" y="69" text-anchor="middle" font-size="12" fill="#6b6559">32768</text>
+<line x1="472.0" x2="472.0" y1="52" y2="56" stroke="#6b6559"/>
+<text x="472.0" y="69" text-anchor="middle" font-size="12" fill="#6b6559">49152</text>
+<line x1="624.0" x2="624.0" y1="52" y2="56" stroke="#6b6559"/>
+<text x="624.0" y="69" text-anchor="end" font-size="12" fill="#6b6559">65535</text>
+<rect x="16" y="81" width="14" height="14" fill="#6b6559" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="92" font-size="12" fill="#6b6559">0–16383</text>
+<text x="156" y="92" font-size="12" fill="#1b1a17">ROM</text>
+<text x="624" y="92" text-anchor="end" font-size="12" fill="#6b6559">16,384 bytes</text>
+<rect x="16" y="103" width="14" height="14" fill="#a93800" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="114" font-size="12" fill="#6b6559">16384–22527</text>
+<text x="156" y="114" font-size="12" fill="#1b1a17">Screen dots</text>
+<text x="624" y="114" text-anchor="end" font-size="12" fill="#6b6559">6,144 bytes</text>
+<rect x="16" y="125" width="14" height="14" fill="#a93800" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="136" font-size="12" fill="#6b6559">22528–23295</text>
+<text x="156" y="136" font-size="12" fill="#1b1a17">Colours</text>
+<text x="624" y="136" text-anchor="end" font-size="12" fill="#6b6559">768 bytes</text>
+<rect x="16" y="147" width="14" height="14" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="158" font-size="12" fill="#6b6559">23296–23551</text>
+<text x="156" y="158" font-size="12" fill="#1b1a17">Printer buffer</text>
+<text x="624" y="158" text-anchor="end" font-size="12" fill="#6b6559">256 bytes</text>
+<rect x="16" y="169" width="14" height="14" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="180" font-size="12" fill="#6b6559">23552–23733</text>
+<text x="156" y="180" font-size="12" fill="#1b1a17">System variables</text>
+<text x="624" y="180" text-anchor="end" font-size="12" fill="#6b6559">182 bytes</text>
+<rect x="16" y="191" width="14" height="14" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="202" font-size="12" fill="#6b6559">23734–23754</text>
+<text x="156" y="202" font-size="12" fill="#1b1a17">Channels</text>
+<text x="624" y="202" text-anchor="end" font-size="12" fill="#6b6559">21 bytes</text>
+<rect x="16" y="213" width="14" height="14" fill="#ffffff" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="224" font-size="12" fill="#6b6559">23755–65367</text>
+<text x="156" y="224" font-size="12" fill="#1b1a17">Program and free memory</text>
+<text x="624" y="224" text-anchor="end" font-size="12" fill="#6b6559">41,613 bytes</text>
+<rect x="16" y="235" width="14" height="14" fill="#d9d4c7" stroke="#1b1a17" stroke-width="1"/>
+<text x="40" y="246" font-size="12" fill="#6b6559">65368–65535</text>
+<text x="156" y="246" font-size="12" fill="#1b1a17">User-defined graphics</text>
+<text x="624" y="246" text-anchor="end" font-size="12" fill="#6b6559">168 bytes</text>
+</svg>

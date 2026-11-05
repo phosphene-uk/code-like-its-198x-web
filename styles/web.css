@@ -1,0 +1,59 @@
+/* A book's free web edition. book.css sets sizes in points for paper, so this file restates them
+   for screens, in rem, from an 18-pixel base. Links are underlined here, as they're not in print. */
+
+html { font-size: 112.5%; line-height: 1.6; background: var(--paper); -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: #fff; padding: 0.5rem 0.75rem; z-index: 1; }
+:focus-visible { outline: 3px solid var(--spot); outline-offset: 3px; }
+
+.site-header { border-bottom: 1px solid var(--hair); background: #fff; }
+.site-header .inner, main, .site-footer .inner { max-width: 42rem; margin: 0 auto; padding: 0 1rem; }
+.site-header .inner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 3.5rem; }
+.site-header a { font: 700 1.05rem var(--body); color: var(--ink); text-decoration: none; }
+.site-header .imprint { display: flex; align-items: center; gap: 0.4rem; font: 700 0.75rem var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.site-header .imprint svg { width: 1.4rem; height: 1.4rem; }
+
+main { padding-top: 2rem; padding-bottom: 3rem; }
+main a { color: var(--spot); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+main a:hover { text-decoration-thickness: 2px; }
+
+h1 { font-size: 2.2rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.4rem; margin: 2.2rem 0 0.6rem; }
+h3 { font-size: 1.15rem; margin: 1.6rem 0 0.4rem; }
+
+.label { display: block; font-size: 0.7rem; color: var(--spot); margin-bottom: 0.4rem; }
+.chapter-title { padding-bottom: 0.75rem; border-bottom: 3px solid var(--spot); }
+
+.listingblock pre { font-size: 0.8rem; background: #fff; }
+.imageblock .title { font-size: 0.8rem; }
+.imageblock img { max-height: 32rem; width: auto; max-width: 100%; }
+table.tableblock { font-size: 0.9rem; }
+table.tableblock th { font-size: 0.7rem; }
+.partintro { font-size: 1rem; color: var(--ink-2); margin: 0 0 0.75rem; }
+
+/* Landing page */
+.cover-thumb { float: right; width: 9rem; margin: 0 0 1rem 1.5rem; border: 1px solid var(--hair); }
+.lede { font-size: 1.15rem; color: var(--ink); }
+.contents { clear: both; }
+.contents ol { list-style: none; padding: 0; }
+.contents .toc-part { font: 700 1.15rem var(--body); color: var(--ink); margin: 1.5rem 0 0.4rem; }
+.contents .toc-part .num { font: 700 0.7rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-right: 0.5rem; }
+.contents .toc-chapter { margin: 0 0 0.3rem; }
+.contents .toc-chapter .num { display: inline-block; width: 2rem; font-family: var(--mono); font-size: 0.85rem; color: var(--muted); }
+.contents .unavailable { color: var(--muted); }
+.contents .badge { font: 700 0.65rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--spot); border-radius: 3px; padding: 0.15rem 0.4rem; margin-left: 0.5rem; vertical-align: 0.15em; }
+
+.end-of-sample, .full-book { background: #fff; border: 1px solid var(--hair); border-left: 4px solid var(--spot); padding: 1rem 1.25rem; margin: 2.5rem 0 0; }
+.end-of-sample h2, .full-book h2 { margin-top: 0; }
+
+.chapter-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--hair); }
+.chapter-nav a { display: block; max-width: 48%; }
+.chapter-nav .next { margin-left: auto; text-align: right; }
+.chapter-nav small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.7rem; }
+
+.site-footer { border-top: 1px solid var(--hair); font-size: 0.85rem; line-height: 1.5; color: var(--muted); padding: 1.5rem 0 2rem; }
+.site-footer p { margin: 0 0 0.5rem; }
+.site-footer a { color: inherit; text-decoration: underline; }
+.version h2 small { font-size: 0.85rem; font-weight: 400; color: var(--muted); margin-left: 0.4rem; }
+@media (max-width: 30rem) { .cover-thumb { width: 6.5rem; margin-left: 1rem; } }
